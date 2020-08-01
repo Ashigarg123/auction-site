@@ -1,0 +1,49 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+{% block content %}
+<div class="p-5">
+
+
+  <h1 class="myhead">Title-{{mylist.subject}}</h1>
+  <p><strong> Uploaded on-</strong>{{mylist.date_posted}}</p>
+  <div class="col-4">
+
+
+
+<img  class="container-fluid"src="{{mylist.url}}"/>
+</div>
+  <p><strong> Msg - </<strong> {{mylist.msg}}</p>
+    </div>
+
+
+    <div class="container-fluid" >
+<div class="main-comment-section">
+{{comments.count}} Comment{{comments.mylist|pluralize}}
+  {% for comment in comments %}
+  <blockquote class="blockquote">
+    <p class="mb-0">{{ comment.comment}}</p>
+    <footer class="blockquote-footer">by <cite title="Source Title">{{user| capfirst}}</cite></footer>
+
+  </blockquote>
+  {% endfor %}
+  {% load crispy_forms_tags %}
+  <form method="post" style="margin-top: 1.3em;">
+            {{ form | crispy }}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary name="{{user.id}}" btn-lg">Comment</button>
+   </form>
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+    {% endblock %}
+{% endblock %}

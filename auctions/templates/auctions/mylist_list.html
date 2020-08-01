@@ -1,0 +1,73 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+  <h2>Active Listings</h2>
+<div class="container" style="text-align:center; ">
+
+
+ <div class="row">
+   {% for x in mylist_list %}
+ <div class="col-md-12" style="text-align:center; background-color:white">
+ <div class="card" style="width: 60%; height: 40%;text-align:center">
+   {% if user.is_authenticated %}
+   {% if x.watched %}
+   <p class="float-left"><a href="{% url 'unwatch' x.id %}" id="unwatch" style="color:red";>Remove from Watchlist
+   </a></p>
+  {% else %}
+      <p class="float-left"><a href="{% url 'watch' x.id %}" id="watch" style="color:black";>Add to Watchlist
+      </a></p>
+  {% endif %}
+
+      {% if can_close %}
+        <p ><a style="color:red;"href="{% url 'p2' x.id %}">Close listing</a><p>
+
+      {% endif %}
+  {% endif %}
+
+<img class="card-img-top" src="{{x.url}}" alt="Card image cap" style="width:100%;text-align:center">
+<div class="card-body" style="text-align:center;text-align:center">
+<h5 class="card-title">Title:-{{x.subject}}</h5>
+<p class="card-text"> Description:- {{x.msg}}</p>
+<p class="card-text">Price:- {{x.current_price}}$ </p>
+<p class="card-text">{{x.date_posted}}</p>
+<p class="card-text"> Uploaded By - {{x.uploaded_by}}</p>
+<p class="card-text"> Bid - {{x.bid}}</p>
+<button type="button" class="btn btn-dark"><p class="card-text"><a href="{%url 'p1' x.id %}">Read more!</a> </p></button>
+
+{% if x.active %}
+  <div class="alert alert-success" role="alert">{{xyz}}</div>
+{% if user.is_authenticated %}
+<form method="post" style="margin-top: 1.3em;">  {% csrf_token %}
+          <input type="number" name="bid" id="bid"min="{{x.current_price}}">
+    <input type="hidden" name="id" value="{{x.id}}">
+
+          <button type="submit" class="btn btn-primary  btn-lg">Bid</button>
+ </form>
+
+ {%else%}
+ <p> Login, if you want to bid </p>
+ {% endif %}
+ {% else %}
+ <div class="alert alert-danger" role="alert">{{msg}}</div>
+ <div class="alert alert-primary" role="alert">{{won}}</div>
+ {% if user.is_authenticated %}
+ <form method="post" style="margin-top: 1.3em;">  {% csrf_token %}
+           <input type="number" name="bid" id="bid"min="{{x.current_price}}">
+     <input type="hidden" name="id" value="{{x.id}}">
+
+           <button type="submit" disabled class="btn btn-primary  btn-lg">Bid</button>
+  </form>
+  {%else%}
+  <p> Login, if you want to bid </p>
+  {% endif %}
+ {%endif %}
+</div>
+</div>
+</div>
+{% endfor %}
+
+
+
+
+</div>
+{% endblock %}

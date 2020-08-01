@@ -1,0 +1,59 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+       <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+        <title>{% block title %}Auctions{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{% static 'auctions/styles.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <h1>Auctions</h1>
+        <div>
+            {% if user.is_authenticated %}
+              <i class="fa fa-user-circle" style="font-size:20px">  Signed in as <strong>{{ user.username }}</strong>.</i>
+            {% else %}
+                Not signed in.
+            {% endif %}
+        </div>
+
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'index' %}"><i class="fa fa-circle" style="font-size:18px;color:green;">Active Listings</i></a>
+            </li>
+
+
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'create' %}"><i class="fa fa-plus-circle" style="font-size:18px">Create Listing</i></a>
+
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'watchlist' %}"><i class="fa fa-th-list" style="font-size:18px;">Mywatchlist</i></a>
+
+    </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'category' %}"><i class="fa fa-navicon" style="font-size:18px">Categories</i></a>
+    </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}"><i class="fa fa-sign-out" style="font-size:18px">Log Out</i></a></li>
+
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}"><i class="fa fa-sign-in" style="font-size:18px">Log In</i></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register' %}">Register</a>
+                </li>
+            {% endif %}
+        </ul>
+        <hr>
+        {% block body %}
+        {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,16 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+{% load crispy_forms_tags %}
+<div class="container">
+<h1> Create Your Litings here! </h1>
+<form enctype="multipart/form-data" method="post">
+
+{% csrf_token %}
+
+{{ form | crispy }}
+<input type="submit"/>
+</form>
+</div>
+{% endblock %}
+</body>

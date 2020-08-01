@@ -1,0 +1,22 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+<div class="container" style="text-align:center; ">
+
+<h5 class="card-title"style="background-color:lightgreen;">Category-</h5>
+
+<ul class="list-group" ">
+  <li class="list-group-item" > <a href="{% url 'gadget'  %}">Gadget </a></li>
+  <li class="list-group-item"> <a href="{% url 'phone' %}"> Phone</a></li>
+  <li class="list-group-item"> <a href="{% url 'vehicle'%}">Vehicle </a></li>
+  <li class="list-group-item"> <a href="{% url 'cloth' %}"> Cloth</a></li>
+  <li class="list-group-item"><a href="{% url 'furniture' %}"> Furniture</a></li>
+
+
+
+</ul>
+
+
+</div>
+{% endblock %}

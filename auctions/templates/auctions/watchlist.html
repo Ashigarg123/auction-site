@@ -1,0 +1,27 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<div class="container" style="text-align:center; ">
+<div class="row">
+ {% for x in watchlist %}
+
+ <div class="col-md-12" style="text-align:center; background-color:white">
+ <div class="card" style="width: 60%; height: 40%;text-align:center">
+<img class="card-img-top" src="{{x.url}}" alt="Card image cap" style="width:100%;text-align:center">
+<div class="card-body" style="text-align:center;text-align:center">
+<h5 class="card-title">Title:-{{x.subject}}</h5>
+<p class="card-text"> Description:- {{x.msg}}</p>
+<p class="card-text">Price:- {{x.current_price}}$ </p>
+<p class="card-text">{{x.date_posted}}</p>
+<p class="card-text"> Uploaded By - {{x.uploaded_by}}</p>
+<p class="card-text"> Bid - {{x.bid}}</p>
+<p class="card-text"><a href="{%url 'p1' x.id %}">Read more!</a> </p>
+</div>
+</div>
+</div>
+
+{% endfor %}
+
+
+</div>
+{% endblock %}
